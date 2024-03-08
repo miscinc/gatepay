@@ -10,7 +10,7 @@ app = Flask(__name__)
 
 # ADMIN_ADDRESS = ""
 W3_PROVIDER = os.getenv("W3_PROVIDER")
-SECRET_KEY = os.getenv("FLASK_SECRET_KEY")
+# SECRET_KEY = os.getenv("FLASK_SECRET_KEY")
 # gasPrice = ""
 # gasLimit = ""
 
