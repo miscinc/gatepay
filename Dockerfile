@@ -18,4 +18,4 @@ EXPOSE 8501
 ENV NAME generative-models
 
 # Run streamlit app when the container launches
-CMD ["flask", "run", "main.py"]
+CMD ["flask", "run"]
