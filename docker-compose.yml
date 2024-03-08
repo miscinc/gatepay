@@ -1,0 +1,9 @@
+# docker compose run btg
+
+version: "3.9"
+
+services:
+  btg:
+    build: ./
+    ports:
+      - "5000:5000"
