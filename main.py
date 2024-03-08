@@ -1,17 +1,11 @@
 from flask import Flask, jsonify, render_template, request, redirect, flash, url_for
 import time, json, os
 from datetime import datetime
-
 from web3 import Web3
 from web3.middleware import geth_poa_middleware
-##########################################################################################################################
 from apscheduler.schedulers.background import BackgroundScheduler
 
-
-
 app = Flask(__name__)
-
-
 
 ADMIN_ADDRESS = ""
 W3_PROVIDER = ""
@@ -23,9 +17,7 @@ gasLimit = ""
 payment_data = json.loads(open('payment_info.json','r').read())
 app.config['SECRET_KEY'] = SECRET_KEY
 
-##########################################################################################################################
 w3 = Web3(Web3.HTTPProvider(W3_PROVIDER))
-##########################################################################################################################
 w3.middleware_onion.inject(geth_poa_middleware, layer=0)
 
 apis = ['testapi']
@@ -48,7 +40,6 @@ def timestamp_to_datetime(timestamp):
     return formatted_time
 app.jinja_env.globals.update(timestamp_to_datetime=timestamp_to_datetime)
 
-##########################################################################################################################
 scheduler = BackgroundScheduler()
 
 def check_payments():
@@ -66,11 +57,10 @@ def check_payments():
                     send_payment_info_to_admin(payment_address, payment_data[payment_address]['private_key'], balance)
                 except:
                     pass
-##########################################################################################################################
+
 # Configure the scheduler to check payments every 10 seconds
 scheduler.add_job(check_payments, 'interval', seconds=10)
 
-##########################################################################################################################
 # Start the scheduler
 scheduler.start()
 
@@ -154,5 +144,4 @@ def send_payment_info_to_admin(payment_address, private_key, balance):
     print(f"Payment information sent to admin. Transaction Hash: {transaction_hash.hex()}")
 
 if __name__ == '__main__':
-	  pass
-    # app.run(host='localhost', port=8080, debug=True)
+    app.run(host='localhost', port=8080, debug=True)
