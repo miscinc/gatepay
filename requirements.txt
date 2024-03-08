@@ -1,4 +1,3 @@
-flask
-web3
-
-apscheduler
+flask==3.0.2
+web3==6.15.1
+apscheduler==3.10.4
