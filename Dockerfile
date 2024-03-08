@@ -15,7 +15,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 EXPOSE 5000
 
 # Define environment variable
-ENV NAME generative-models
+#ENV NAME generative-models
 
 # Run streamlit app when the container launches
 CMD ["flask", "run"]
