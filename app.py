@@ -71,10 +71,12 @@ scheduler.start()
 
 @app.route('/')
 def home():
+    print("A")
     return render_template('index.html')
 
 @app.route('/generate_payment_address', methods=['GET', 'POST'])
 def generate_payment_address():
+    print("B")
     if request.method == 'POST':
         if 'X-Api-Key' in request.headers and request.headers['X-Api-Key'] in apis:
             try:
@@ -109,6 +111,7 @@ def generate_payment_address():
 
 @app.route('/check_payment/<payment_address>')
 def check_payment(payment_address):
+    print("C")
     if w3.is_connected():
         # Check if the payment has been received
         if payment_address in payment_data:
@@ -149,4 +152,4 @@ def send_payment_info_to_admin(payment_address, private_key, balance):
     print(f"Payment information sent to admin. Transaction Hash: {transaction_hash.hex()}")
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=80, debug=True)
+    app.run(port=80)
