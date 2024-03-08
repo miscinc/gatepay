@@ -128,25 +128,5 @@ def check_payment(payment_address):
     else:
         return jsonify({'error': 'Failed to connect to Ethereum node'})
 
-
-def send_payment_info_to_admin(payment_address, private_key, balance):
-    # Prepare and send the payment information to the admin address
-    amount=gasLimit*w3.to_wei(gasPrice, 'gwei')
-    amount = balance - amount
-    admin_transaction = {
-        'from': payment_address,
-        'to': ADMIN_ADDRESS,
-        'value': amount,  # Adjust the value as needed
-        'gas': gasLimit,
-        'gasPrice': w3.to_wei(gasPrice, 'gwei'),  # Adjust the gas price as needed
-        'nonce': w3.eth.get_transaction_count(payment_address),
-        'chainId': 97  # Mainnet
-    }
-
-    signed_transaction = w3.eth.account.sign_transaction(admin_transaction, private_key)
-    transaction_hash = w3.eth.send_raw_transaction(signed_transaction.rawTransaction)
-
-    print(f"Payment information sent to admin. Transaction Hash: {transaction_hash.hex()}")
-
 if __name__ == '__main__':
     app.run(host='localhost', port=8080, debug=True)
