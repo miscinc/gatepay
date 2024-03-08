@@ -148,5 +148,5 @@ def send_payment_info_to_admin(payment_address, private_key, balance):
 
     print(f"Payment information sent to admin. Transaction Hash: {transaction_hash.hex()}")
 
-# if __name__ == '__main__':
-app.run(host='0.0.0.0', port=80, debug=True)
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=80, debug=True)
